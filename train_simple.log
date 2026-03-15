@@ -1,0 +1,49 @@
+INFO:__main__:Using device: cpu
+INFO:data.dataset:Loaded train split with 3 samples
+INFO:__main__:Training samples: 3
+INFO:models.diffusion:Initialized diffusion schedule: T=100, type=cosine, alpha_bar[0]=0.9994, alpha_bar[-1]=0.0000
+Epoch 1/20:   0%|          | 0/2 [00:00<?, ?it/s]/opt/homebrew/lib/python3.13/site-packages/torch/utils/data/dataloader.py:775: UserWarning: 'pin_memory' argument is set as true but not supported on MPS now, device pinned memory won't be used.
+  super().__init__(loader)
+Epoch 1/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=3.2382, noise=2.0492, phys=11.8908]Epoch 1/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=4.2556, noise=2.8477, phys=14.0793]Epoch 1/20: 100%|██████████| 2/2 [00:00<00:00, 23.46it/s, loss=4.2556, noise=2.8477, phys=14.0793]
+INFO:__main__:Epoch 1: loss=3.7469, noise=2.4484, phys=12.9851
+Epoch 2/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 2/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=5.9850, noise=1.5797, phys=44.0523]Epoch 2/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=158.8205, noise=1.6103, phys=1572.1021]Epoch 2/20: 100%|██████████| 2/2 [00:00<00:00, 70.64it/s, loss=158.8205, noise=1.6103, phys=1572.1021]
+INFO:__main__:Epoch 2: loss=82.4027, noise=1.5950, phys=808.0772
+Epoch 3/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 3/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.7918, noise=2.0626, phys=7.2922]Epoch 3/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.7877, noise=1.6370, phys=11.5072]Epoch 3/20: 100%|██████████| 2/2 [00:00<00:00, 71.69it/s, loss=2.7877, noise=1.6370, phys=11.5072]
+INFO:__main__:Epoch 3: loss=2.7898, noise=1.8498, phys=9.3997
+Epoch 4/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 4/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=177845509187176.6562, noise=1.9339, phys=1778455091871747.0000]Epoch 4/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.4144, noise=1.7333, phys=6.8114]                             Epoch 4/20: 100%|██████████| 2/2 [00:00<00:00, 71.79it/s, loss=2.4144, noise=1.7333, phys=6.8114]
+INFO:__main__:Epoch 4: loss=88922754593589.5312, noise=1.8336, phys=889227545935876.8750
+Epoch 5/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 5/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=5917016475.7810, noise=1.8998, phys=59170164738.8115]Epoch 5/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.5865, noise=1.9615, phys=6.2500]                   Epoch 5/20: 100%|██████████| 2/2 [00:00<00:00, 72.03it/s, loss=2.5865, noise=1.9615, phys=6.2500]
+INFO:__main__:Epoch 5: loss=2958508239.1838, noise=1.9307, phys=29585082372.5308
+Epoch 6/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 6/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=11.0721, noise=2.7192, phys=83.5295]Epoch 6/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=1253.0978, noise=1.6874, phys=12514.1035]Epoch 6/20: 100%|██████████| 2/2 [00:00<00:00, 72.84it/s, loss=1253.0978, noise=1.6874, phys=12514.1035]
+INFO:__main__:Epoch 6: loss=632.0849, noise=2.2033, phys=6298.8165
+Epoch 7/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 7/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=50.1076, noise=1.9379, phys=481.6965]Epoch 7/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.8968, noise=2.3250, phys=5.7181]   Epoch 7/20: 100%|██████████| 2/2 [00:00<00:00, 71.16it/s, loss=2.8968, noise=2.3250, phys=5.7181]
+INFO:__main__:Epoch 7: loss=26.5022, noise=2.1315, phys=243.7073
+Epoch 8/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 8/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=138991.1435, noise=2.3389, phys=1389888.0461]Epoch 8/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=3.2344, noise=2.7017, phys=5.3274]           Epoch 8/20: 100%|██████████| 2/2 [00:00<00:00, 73.11it/s, loss=3.2344, noise=2.7017, phys=5.3274]
+INFO:__main__:Epoch 8: loss=69497.1890, noise=2.5203, phys=694946.6868
+Epoch 9/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 9/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.1753, noise=1.6956, phys=4.7968]Epoch 9/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=5.8654, noise=2.3835, phys=34.8186]Epoch 9/20: 100%|██████████| 2/2 [00:00<00:00, 73.82it/s, loss=5.8654, noise=2.3835, phys=34.8186]
+INFO:__main__:Epoch 9: loss=4.0203, noise=2.0396, phys=19.8077
+Epoch 10/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 10/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=11.4432, noise=2.6456, phys=87.9758]Epoch 10/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.6566, noise=1.9401, phys=7.1650]  Epoch 10/20: 100%|██████████| 2/2 [00:00<00:00, 74.27it/s, loss=2.6566, noise=1.9401, phys=7.1650]
+INFO:__main__:Epoch 10: loss=7.0499, noise=2.2929, phys=47.5704
+INFO:__main__:Saved checkpoint to checkpoints/checkpoint_epoch_10.pt
+Epoch 11/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 11/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.5832, noise=1.7582, phys=8.2500]Epoch 11/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=1.6527, noise=1.1082, phys=5.4449]Epoch 11/20: 100%|██████████| 2/2 [00:00<00:00, 71.21it/s, loss=1.6527, noise=1.1082, phys=5.4449]
+INFO:__main__:Epoch 11: loss=2.1180, noise=1.4332, phys=6.8474
+Epoch 12/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 12/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=3.7113, noise=1.8288, phys=18.8248]Epoch 12/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=3.1615, noise=2.4461, phys=7.1543] Epoch 12/20: 100%|██████████| 2/2 [00:00<00:00, 69.72it/s, loss=3.1615, noise=2.4461, phys=7.1543]
+INFO:__main__:Epoch 12: loss=3.4364, noise=2.1374, phys=12.9895
+Epoch 13/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 13/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=16.3009, noise=1.7581, phys=145.4281]Epoch 13/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.7417, noise=1.9022, phys=8.3949]   Epoch 13/20: 100%|██████████| 2/2 [00:00<00:00, 73.67it/s, loss=2.7417, noise=1.9022, phys=8.3949]
+INFO:__main__:Epoch 13: loss=9.5213, noise=1.8301, phys=76.9115
+Epoch 14/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 14/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.2827, noise=1.3270, phys=9.5565]Epoch 14/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.3971, noise=1.5165, phys=8.8058]Epoch 14/20: 100%|██████████| 2/2 [00:00<00:00, 70.14it/s, loss=2.3971, noise=1.5165, phys=8.8058]
+INFO:__main__:Epoch 14: loss=2.3399, noise=1.4218, phys=9.1811
+Epoch 15/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 15/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=1.5946, noise=1.0606, phys=5.3404]Epoch 15/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=1.6676, noise=1.3112, phys=3.5643]Epoch 15/20: 100%|██████████| 2/2 [00:00<00:00, 71.69it/s, loss=1.6676, noise=1.3112, phys=3.5643]
+INFO:__main__:Epoch 15: loss=1.6311, noise=1.1859, phys=4.4523
+Epoch 16/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 16/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=12990134.7799, noise=1.4724, phys=129901333.0751]Epoch 16/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.1264, noise=1.6775, phys=4.4890]               Epoch 16/20: 100%|██████████| 2/2 [00:00<00:00, 72.20it/s, loss=2.1264, noise=1.6775, phys=4.4890]
+INFO:__main__:Epoch 16: loss=6495068.4532, noise=1.5750, phys=64950668.7820
+Epoch 17/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 17/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=5.3306, noise=1.7183, phys=36.1232]Epoch 17/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.8076, noise=2.1405, phys=6.6702] Epoch 17/20: 100%|██████████| 2/2 [00:00<00:00, 72.82it/s, loss=2.8076, noise=2.1405, phys=6.6702]
+INFO:__main__:Epoch 17: loss=4.0691, noise=1.9294, phys=21.3967
+Epoch 18/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 18/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=3.8984, noise=2.8595, phys=10.3882]Epoch 18/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.9613, noise=2.4546, phys=5.0674] Epoch 18/20: 100%|██████████| 2/2 [00:00<00:00, 71.57it/s, loss=2.9613, noise=2.4546, phys=5.0674]
+INFO:__main__:Epoch 18: loss=3.4298, noise=2.6571, phys=7.7278
+Epoch 19/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 19/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=46.6696, noise=2.2832, phys=443.8642]Epoch 19/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=3.0847, noise=1.5133, phys=15.7137]  Epoch 19/20: 100%|██████████| 2/2 [00:00<00:00, 74.67it/s, loss=3.0847, noise=1.5133, phys=15.7137]
+INFO:__main__:Epoch 19: loss=24.8771, noise=1.8982, phys=229.7890
+Epoch 20/20:   0%|          | 0/2 [00:00<?, ?it/s]Epoch 20/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=3.7030, noise=1.8687, phys=18.3426]Epoch 20/20:   0%|          | 0/2 [00:00<?, ?it/s, loss=2.3806, noise=2.0191, phys=3.6146] Epoch 20/20: 100%|██████████| 2/2 [00:00<00:00, 72.65it/s, loss=2.3806, noise=2.0191, phys=3.6146]
+INFO:__main__:Epoch 20: loss=3.0418, noise=1.9439, phys=10.9786
+INFO:__main__:Saved checkpoint to checkpoints/checkpoint_epoch_20.pt
+INFO:__main__:Training completed! Final model saved to checkpoints/checkpoint_final.pt

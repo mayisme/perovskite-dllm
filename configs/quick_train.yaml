@@ -1,0 +1,40 @@
+# 快速训练配置（用于演示）
+
+data:
+  processed_data_path: "data/processed/perovskites.h5"
+  batch_size: 2
+  num_workers: 0
+  augment: true
+
+model:
+  hidden_dim: 64
+  n_layers: 2
+  cutoff_radius: 6.0
+  n_atom_types: 100
+
+diffusion:
+  timesteps: 100
+  schedule_type: "cosine"
+
+training:
+  epochs: 20
+  lr: 1.0e-4
+  weight_decay: 0.01
+  grad_clip: 1.0
+  val_frequency: 5
+  checkpoint_frequency: 10
+  early_stopping_patience: 20
+  device: "cpu"
+  use_wandb: false
+  physics_loss_weight: 0.1
+
+physics_loss:
+  goldschmidt: 1.0
+  coordination: 0.5
+  bond_length: 0.3
+  pauli: 1.0
+
+generation:
+  num_samples: 10
+  sampling_steps: 50
+  sampler: "ddpm"

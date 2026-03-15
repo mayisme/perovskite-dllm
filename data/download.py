@@ -12,8 +12,10 @@ def download_perovskites(max_structures=5000):
     """Download ABO3 perovskite structures."""
     with MPRester(API_KEY) as mpr:
         # Query for perovskites with specific criteria
+        # ABO3: num_elements=3, nsites=5 (primitive)
         docs = mpr.materials.summary.search(
-            num_elements=(3, 3),
+            formula="*O3",
+            num_elements=3,
             fields=["material_id", "formula_pretty", "structure", 
                    "band_gap", "formation_energy_per_atom", "symmetry",
                    "energy_above_hull"]
@@ -25,8 +27,9 @@ def download_perovskites(max_structures=5000):
             if doc.energy_above_hull and doc.energy_above_hull > 0.1:
                 continue
             
+            # Filter: ABO3 stoichiometry (Total atoms should be multiple of 5)
             struct = doc.structure
-            if len(struct) < 5:
+            if len(struct) % 5 != 0:
                 continue
                 
             perovskites.append({

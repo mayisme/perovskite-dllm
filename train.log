@@ -1,0 +1,20 @@
+2026-03-15 01:16:29,502 - __main__ - INFO - Using device: cpu
+2026-03-15 01:16:29,503 - data.dataset - INFO - Loaded train split with 3 samples
+Traceback (most recent call last):
+  File "/Users/xiaoyf/Documents/Python/dllm-perovskite/main.py", line 219, in <module>
+    main()
+    ~~~~^^
+  File "/Users/xiaoyf/Documents/Python/dllm-perovskite/main.py", line 209, in main
+    cmd_train(args)
+    ~~~~~~~~~^^^^^^
+  File "/Users/xiaoyf/Documents/Python/dllm-perovskite/main.py", line 58, in cmd_train
+    val_loader = get_dataloader(
+        config['data']['processed_data_path'],
+    ...<3 lines>...
+        augment=False
+    )
+  File "/Users/xiaoyf/Documents/Python/dllm-perovskite/data/dataset.py", line 156, in get_dataloader
+    dataset = PerovskiteDataset(h5_path, split=split, augment=augment)
+  File "/Users/xiaoyf/Documents/Python/dllm-perovskite/data/dataset.py", line 44, in __init__
+    raise ValueError(f"Split '{split}' not found in {h5_path}")
+ValueError: Split 'val' not found in data/processed/perovskites.h5

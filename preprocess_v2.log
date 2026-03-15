@@ -1,0 +1,35 @@
+2026-03-15 06:57:14,739 - __main__ - INFO - Loading raw data from data/raw/perovskites.json...
+2026-03-15 06:57:15,178 - __main__ - INFO - Loaded 5000 raw structures
+Parsing structures:   0%|          | 0/5000 [00:00<?, ?it/s]Parsing structures:   3%|▎         | 159/5000 [00:00<00:05, 881.57it/s]Parsing structures:   7%|▋         | 363/5000 [00:00<00:05, 859.40it/s]Parsing structures:  13%|█▎        | 662/5000 [00:00<00:02, 1454.06it/s]Parsing structures:  19%|█▉        | 948/5000 [00:00<00:02, 1853.13it/s]Parsing structures:  26%|██▌       | 1283/5000 [00:00<00:01, 2285.66it/s]Parsing structures:  32%|███▏      | 1608/5000 [00:00<00:01, 2565.78it/s]Parsing structures:  39%|███▉      | 1963/5000 [00:00<00:01, 2853.86it/s]Parsing structures:  47%|████▋     | 2327/5000 [00:01<00:00, 3077.09it/s]Parsing structures:  53%|█████▎    | 2651/5000 [00:01<00:01, 1978.28it/s]Parsing structures:  58%|█████▊    | 2908/5000 [00:01<00:01, 2082.48it/s]Parsing structures:  65%|██████▌   | 3264/5000 [00:01<00:00, 2420.68it/s]Parsing structures:  71%|███████   | 3551/5000 [00:01<00:00, 2530.82it/s]Parsing structures:  77%|███████▋  | 3837/5000 [00:01<00:00, 2451.31it/s]Parsing structures:  84%|████████▍ | 4214/5000 [00:01<00:00, 2792.41it/s]Parsing structures:  93%|█████████▎| 4631/5000 [00:01<00:00, 3160.75it/s]Parsing structures: 100%|██████████| 5000/5000 [00:02<00:00, 2453.90it/s]
+2026-03-15 06:57:17,247 - __main__ - INFO - Successfully parsed 5000 structures
+2026-03-15 06:57:17,247 - data.filter - INFO - Starting with 5000 structures
+2026-03-15 06:57:17,248 - data.filter - INFO - Energy filter: 5000/5000 structures passed
+2026-03-15 06:57:17,569 - data.filter - INFO - Topology filter: 894/5000 structures passed
+2026-03-15 06:57:17,839 - data.filter - INFO - Coordination filter: 535/894 structures passed
+2026-03-15 06:57:29,907 - data.filter - INFO - Oxidation state filter: 535/535 structures passed
+2026-03-15 06:58:02,115 - data.filter - INFO - Deduplication: 493/535 unique structures
+2026-03-15 06:58:02,115 - data.filter - INFO - Final: 493 structures passed all filters
+2026-03-15 06:58:02,115 - __main__ - INFO - Standardizing to primitive cells...
+Standardizing:   0%|          | 0/493 [00:00<?, ?it/s]Standardizing:   3%|▎         | 17/493 [00:00<00:03, 152.50it/s]Standardizing:   7%|▋         | 34/493 [00:00<00:02, 162.30it/s]Standardizing:  10%|█         | 51/493 [00:00<00:02, 162.94it/s]Standardizing:  18%|█▊        | 87/493 [00:00<00:01, 230.52it/s]Standardizing:  22%|██▏       | 110/493 [00:00<00:01, 197.47it/s]Standardizing:  27%|██▋       | 131/493 [00:00<00:02, 126.28it/s]Standardizing:  30%|██▉       | 147/493 [00:01<00:02, 117.07it/s]Standardizing:  38%|███▊      | 185/493 [00:01<00:01, 170.29it/s]Standardizing:  42%|████▏     | 206/493 [00:01<00:01, 178.06it/s]Standardizing:  46%|████▌     | 227/493 [00:01<00:01, 177.25it/s]Standardizing:  52%|█████▏    | 257/493 [00:01<00:01, 204.42it/s]Standardizing:  57%|█████▋    | 283/493 [00:01<00:00, 217.09it/s]Standardizing:  64%|██████▍   | 316/493 [00:01<00:00, 245.26it/s]Standardizing:  69%|██████▉   | 342/493 [00:01<00:00, 240.72it/s]Standardizing:  74%|███████▍  | 367/493 [00:02<00:01, 104.57it/s]Standardizing:  78%|███████▊  | 386/493 [00:02<00:01, 101.73it/s]Standardizing:  83%|████████▎ | 408/493 [00:02<00:00, 111.04it/s]Standardizing:  86%|████████▌ | 424/493 [00:02<00:00, 104.49it/s]Standardizing:  94%|█████████▎| 461/493 [00:03<00:00, 149.93it/s]Standardizing:  99%|█████████▊| 486/493 [00:03<00:00, 163.45it/s]Standardizing: 100%|██████████| 493/493 [00:03<00:00, 153.96it/s]
+2026-03-15 06:58:05,317 - __main__ - INFO - Standardized 210 structures to primitive cells
+2026-03-15 06:58:05,319 - __main__ - INFO - Composition-aware split: train=167, val=21, test=22
+2026-03-15 06:58:05,325 - __main__ - INFO - Saving train split with 167 structures
+2026-03-15 06:58:05,325 - __main__ - INFO -   Max atoms in train: 20
+Saving train:   0%|          | 0/167 [00:00<?, ?it/s]Saving train: 100%|██████████| 167/167 [00:00<00:00, 4962.83it/s]
+2026-03-15 06:58:05,361 - __main__ - INFO - Saving val split with 21 structures
+2026-03-15 06:58:05,361 - __main__ - INFO -   Max atoms in val: 20
+Saving val:   0%|          | 0/21 [00:00<?, ?it/s]Saving val: 100%|██████████| 21/21 [00:00<00:00, 5219.89it/s]
+2026-03-15 06:58:05,365 - __main__ - INFO - Saving test split with 22 structures
+2026-03-15 06:58:05,366 - __main__ - INFO -   Max atoms in test: 20
+Saving test:   0%|          | 0/22 [00:00<?, ?it/s]Saving test: 100%|██████████| 22/22 [00:00<00:00, 5017.11it/s]
+2026-03-15 06:58:05,371 - __main__ - INFO - 
+==================================================
+2026-03-15 06:58:05,371 - __main__ - INFO - Preprocessing Statistics:
+2026-03-15 06:58:05,371 - __main__ - INFO -   Original structures: 5000
+2026-03-15 06:58:05,371 - __main__ - INFO -   After filtering: 493
+2026-03-15 06:58:05,371 - __main__ - INFO -   After standardization: 210
+2026-03-15 06:58:05,371 - __main__ - INFO -   Train: 167
+2026-03-15 06:58:05,371 - __main__ - INFO -   Val: 21
+2026-03-15 06:58:05,371 - __main__ - INFO -   Test: 22
+2026-03-15 06:58:05,371 - __main__ - INFO - ==================================================
+2026-03-15 06:58:05,371 - __main__ - INFO - Successfully saved preprocessed data to data/processed/perovskites_v2.h5
