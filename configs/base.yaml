@@ -34,8 +34,8 @@ diffusion:
 
 # 训练配置
 training:
-  epochs: 50
-  lr: 1.0e-4
+  epochs: 10
+  lr: 5.0e-5
   weight_decay: 0.01
   grad_clip: 1.0
   val_frequency: 5
