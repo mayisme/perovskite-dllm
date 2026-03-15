@@ -1,0 +1,104 @@
+{
+  "experiment_type": "learning_rate_comparison",
+  "total_experiments": 3,
+  "experiments": {
+    "lr_5e-5_warmup_fast": {
+      "config": {
+        "lr": 5e-05,
+        "scheduler": "cosine",
+        "warmup": true
+      },
+      "final_train_loss": 1.9363,
+      "final_val_loss": 1.9209,
+      "best_val_loss": 1.8993,
+      "train_loss_history": [
+        2.0029,
+        2.002,
+        1.9698,
+        1.9319,
+        1.9363
+      ],
+      "val_loss_history": [
+        1.9489,
+        1.9353,
+        1.9464,
+        1.8993,
+        1.9209
+      ],
+      "epochs_completed": 5,
+      "convergence_speed": {
+        "epochs_to_best": 3,
+        "improvement_rate": 0.009920000000000017
+      }
+    },
+    "lr_2e-4_warmup_fast": {
+      "config": {
+        "lr": 0.0002,
+        "scheduler": "cosine",
+        "warmup": true
+      },
+      "final_train_loss": 1.9479,
+      "final_val_loss": 1.9162,
+      "best_val_loss": 1.9162,
+      "train_loss_history": [
+        2.0001,
+        1.9983,
+        1.9952,
+        1.9402,
+        1.9479
+      ],
+      "val_loss_history": [
+        1.9987,
+        1.9873,
+        1.9838,
+        1.9278,
+        1.9162
+      ],
+      "epochs_completed": 5,
+      "convergence_speed": {
+        "epochs_to_best": 4,
+        "improvement_rate": 0.016500000000000004
+      }
+    },
+    "lr_1e-4_linear_fast": {
+      "config": {
+        "lr": 0.0001,
+        "scheduler": "linear",
+        "warmup": false
+      },
+      "final_train_loss": 1.9327,
+      "final_val_loss": 1.8903,
+      "best_val_loss": 1.8903,
+      "train_loss_history": [
+        2.0071,
+        2.001,
+        1.9969,
+        1.9386,
+        1.9327
+      ],
+      "val_loss_history": [
+        2.0553,
+        2.0292,
+        1.9663,
+        1.9633,
+        1.8903
+      ],
+      "epochs_completed": 5,
+      "convergence_speed": {
+        "epochs_to_best": 4,
+        "improvement_rate": 0.03299999999999996
+      }
+    }
+  },
+  "summary": {
+    "best_experiment": "lr_1e-4_linear_fast",
+    "best_val_loss": 1.8903,
+    "recommendations": [
+      {
+        "recommendation": "Use learning rate 0.0001 with linear scheduler",
+        "reason": "Achieved best validation loss of 1.8903",
+        "convergence_info": "Converged in 4 epochs"
+      }
+    ]
+  }
+}

@@ -1,0 +1,237 @@
+# Baseline DiffCSP Simple 配置文件
+# 简化版Crystal Structure Prediction by Joint Equivariant Diffusion
+
+# 数据配置
+data:
+  raw_data_path: "data/raw/perovskites_full.json"
+  processed_data_path: "data/processed/perovskites_20k_relaxed.h5"
+  split_ratios: [0.8, 0.1, 0.1]
+  batch_size: 16
+  num_workers: 2
+  augment: true
+  energy_threshold: 1.0
+  max_atoms: 30
+  skip_topology: true
+  skip_coordination: true
+  skip_oxidation: true
+  skip_dedup: true
+  seed: 42
+
+# 模型配置 - DiffCSP架构
+model:
+  type: "diffcsp_simple"
+  
+  # 联合扩散模型配置
+  joint_diffusion:
+    # 晶格参数扩散
+    lattice:
+      parameterization: "direct"  # 直接扩散(a,b,c,α,β,γ)，不用Cholesky
+      dim: 6
+      scale: [10.0, 10.0, 10.0, 180.0, 180.0, 180.0]  # 归一化尺度
+    
+    # 分数坐标扩散
+    coords:
+      space: "fractional"  # 分数坐标空间
+      dim: 3
+      periodic: true  # 周期边界条件
+      wrap: true  # 自动包裹到[0,1)
+  
+  # 去噪模型配置 (EGNN替代Periodic-E(3)-Equivariant GNN)
+  denoising_model:
+    type: "egnn"
+    hidden_dim: 128
+    n_layers: 4  # 比CDVAE多一层，因为是端到端
+    cutoff_radius: 6.0
+    n_atom_types: 100
+    dropout: 0.1
+    
+    # 时间步嵌入
+    time_embedding:
+      dim: 128
+      type: "sinusoidal"
+    
+    # 条件嵌入（可选）
+    condition_embedding:
+      enabled: false
+      properties: ["band_gap", "formation_energy"]
+      dim: 64
+
+# 扩散配置 - 联合扩散晶格和坐标
+diffusion:
+  timesteps: 500
+  schedule_type: "cosine"
+  prediction_type: "epsilon"  # 预测噪声
+  beta_start: 0.0001
+  beta_end: 0.02
+  
+  # 联合扩散权重
+  loss_weights:
+    lattice: 0.5  # 晶格损失权重
+    coords: 1.0  # 坐标损失权重
+    types: 0.3  # 原子类型损失权重（如果预测）
+  
+  # 噪声调度
+  noise_schedule:
+    lattice: "cosine"  # 晶格使用余弦调度
+    coords: "cosine"  # 坐标使用余弦调度
+
+# 训练配置 - 端到端单阶段训练
+training:
+  epochs: 50
+  lr: 1.0e-4
+  weight_decay: 0.01
+  grad_clip: 1.0
+  val_frequency: 5
+  checkpoint_frequency: 10
+  early_stopping_patience: 15
+  
+  # 优化器配置
+  optimizer:
+    type: "adamw"
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+  
+  # 学习率调度
+  lr_scheduler:
+    type: "cosine"
+    warmup_epochs: 5
+    min_lr: 1.0e-6
+  
+  # 损失配置
+  loss:
+    type: "mse"  # 均方误差
+    reduction: "mean"
+  
+  # 通用配置
+  device: "cpu"
+  use_wandb: false
+  wandb_project: "dllm-perovskite-baselines"
+  wandb_run_name: "diffcsp_simple"
+
+# 生成配置
+generation:
+  num_samples: 100
+  sampling_steps: 100  # DDPM采样步数
+  sampler: "ddpm"
+  guidance_scale: 1.0  # 无条件生成时为1.0
+  temperature: 1.0
+  
+  # 条件生成（可选）
+  conditional:
+    enabled: false
+    band_gap: 3.0
+    formation_energy: -5.0
+  
+  # 采样策略
+  sampling:
+    # 晶格采样
+    lattice:
+      init_noise_scale: 1.0
+      clip_range: [3.0, 15.0]  # 晶格参数范围（Å）
+      angle_clip_range: [60.0, 120.0]  # 角度范围（度）
+    
+    # 坐标采样
+    coords:
+      init_noise_scale: 1.0
+      wrap_fractional: true  # 包裹到[0,1)
+      min_distance: 1.5  # 最小原子间距（Å）
+
+# 验证配置
+validation:
+  min_distance: 1.5
+  goldschmidt_range: [0.8, 1.0]
+  coordination_tolerance: 0.5
+  use_ml_potential: false
+  ml_potential_type: "chgnet"
+  use_dft: false
+  dft_top_k: 10
+
+# 评估配置
+evaluation:
+  metrics:
+    - "match_rate"
+    - "coverage"
+    - "novelty"
+    - "validity"
+    - "training_efficiency"
+  
+  match_rate:
+    threshold: 0.1  # RMSD阈值（Å）
+  
+  coverage:
+    k_nearest: 10
+    threshold: 0.2
+  
+  novelty:
+    threshold: 0.1
+  
+  validity:
+    levels: ["geometric", "chemical", "physical"]
+    geometric:
+      min_distance: 1.5
+      lattice_positive: true
+      lattice_range: [3.0, 15.0]
+      angle_range: [60.0, 120.0]
+    chemical:
+      goldschmidt_range: [0.8, 1.0]
+      coordination_check: true
+      oxidation_check: true
+    physical:
+      ml_relax: false
+      dft_check: false
+
+# 日志配置
+logging:
+  level: "INFO"
+  save_dir: "logs/diffcsp_simple"
+  checkpoint_dir: "checkpoints/diffcsp_simple"
+  output_dir: "outputs/diffcsp_simple"
+  
+  # 保存频率
+  save_train_samples: true
+  save_val_samples: true
+  save_generated_samples: true
+  
+  # 可视化
+  visualize_training: true
+  visualize_generation: true
+  
+  # 调试
+  debug_mode: false
+  save_intermediate_steps: false  # 保存中间扩散步骤（用于调试）
+
+# 实验配置
+experiment:
+  name: "baseline_diffcsp_simple"
+  description: "Simplified DiffCSP baseline for perovskite generation"
+  tags: ["baseline", "diffcsp", "joint_diffusion", "fractional_coords"]
+  notes: |
+    简化版DiffCSP实现:
+    - 用EGNN替代Periodic-E(3)-Equivariant GNN
+    - 直接扩散(a,b,c,α,β,γ)，不用Cholesky分解
+    - 时间步500（原版1000）
+    - 端到端单阶段训练(50 epochs)
+    - 联合扩散晶格参数和分数坐标
+    
+    关键特性:
+    - 分数坐标天然处理周期性
+    - 联合建模晶格和坐标的相关性
+    - PBC-aware边构建（minimum-image convention）
+
+# 架构对比
+architecture_comparison:
+  cdvae:
+    - "两阶段训练: VAE预训练 + 潜在扩散"
+    - "潜在空间扩散（低维）"
+    - "编码器-解码器分离"
+  
+  diffcsp:
+    - "端到端单阶段训练"
+    - "直接扩散晶格和坐标（高维）"
+    - "联合建模"
+  
+  dllm_perovskite:
+    - "端到端单阶段训练"
+    - "对数空间晶格扩散"
+    - "EGNN+Transformer混合架构"
+    - "物理损失集成"

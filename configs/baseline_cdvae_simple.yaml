@@ -1,0 +1,181 @@
+# Baseline CDVAE Simple 配置文件
+# 简化版Crystal Diffusion Variational Autoencoder
+
+# 数据配置
+data:
+  raw_data_path: "data/raw/perovskites_full.json"
+  processed_data_path: "data/processed/perovskites_20k_relaxed.h5"
+  split_ratios: [0.8, 0.1, 0.1]
+  batch_size: 16
+  num_workers: 2
+  augment: true
+  energy_threshold: 1.0
+  max_atoms: 30
+  skip_topology: true
+  skip_coordination: true
+  skip_oxidation: true
+  skip_dedup: true
+  seed: 42
+
+# 模型配置 - CDVAE架构
+model:
+  type: "cdvae_simple"
+  
+  # 编码器配置 (EGNN替代DimeNet++)
+  encoder:
+    type: "egnn"
+    hidden_dim: 128
+    n_layers: 3
+    cutoff_radius: 6.0
+    n_atom_types: 100
+    dropout: 0.1
+  
+  # 潜在空间配置
+  latent:
+    dim: 64  # 潜在向量维度 (原版256，简化为64)
+    kl_weight: 0.001  # KL散度权重
+  
+  # 解码器配置 (EGNN替代GemNet)
+  decoder:
+    type: "egnn"
+    hidden_dim: 128
+    n_layers: 3
+    cutoff_radius: 6.0
+    dropout: 0.1
+    condition_on_latent: true  # 条件化在潜在向量上
+
+# 扩散配置 - 在潜在空间中扩散
+diffusion:
+  timesteps: 500  # 原版1000，简化为500
+  schedule_type: "cosine"
+  prediction_type: "epsilon"  # 预测噪声
+  beta_start: 0.0001
+  beta_end: 0.02
+
+# 训练配置 - 两阶段训练
+training:
+  # 阶段1: VAE预训练
+  stage1:
+    name: "vae_pretrain"
+    epochs: 20
+    lr: 1.0e-4
+    weight_decay: 0.01
+    grad_clip: 1.0
+    val_frequency: 2
+    checkpoint_frequency: 5
+    early_stopping_patience: 10
+    
+    # VAE损失权重
+    loss_weights:
+      reconstruction: 1.0  # 重建损失
+      kl_divergence: 0.001  # KL散度
+      lattice: 0.5  # 晶格重建
+      coords: 1.0  # 坐标重建
+      types: 0.3  # 原子类型重建
+  
+  # 阶段2: 潜在扩散训练
+  stage2:
+    name: "latent_diffusion"
+    epochs: 30
+    lr: 5.0e-5  # 更小的学习率
+    weight_decay: 0.01
+    grad_clip: 1.0
+    val_frequency: 3
+    checkpoint_frequency: 5
+    early_stopping_patience: 10
+    freeze_encoder: true  # 冻结编码器
+    freeze_decoder: false  # 微调解码器
+    
+    # 扩散损失权重
+    loss_weights:
+      diffusion: 1.0  # 扩散损失（MSE）
+  
+  # 通用配置
+  device: "cpu"
+  use_wandb: false
+  wandb_project: "dllm-perovskite-baselines"
+  wandb_run_name: "cdvae_simple"
+
+# 生成配置
+generation:
+  num_samples: 100
+  sampling_steps: 100  # DDPM采样步数
+  sampler: "ddpm"
+  guidance_scale: 1.0  # 无条件生成时为1.0
+  temperature: 1.0
+  
+  # 条件生成（可选）
+  conditional:
+    enabled: false
+    band_gap: 3.0
+    formation_energy: -5.0
+
+# 验证配置
+validation:
+  min_distance: 1.5
+  goldschmidt_range: [0.8, 1.0]
+  coordination_tolerance: 0.5
+  use_ml_potential: false
+  ml_potential_type: "chgnet"
+  use_dft: false
+  dft_top_k: 10
+
+# 评估配置
+evaluation:
+  metrics:
+    - "match_rate"
+    - "coverage"
+    - "novelty"
+    - "validity"
+    - "training_efficiency"
+  
+  match_rate:
+    threshold: 0.1  # RMSD阈值（Å）
+  
+  coverage:
+    k_nearest: 10
+    threshold: 0.2
+  
+  novelty:
+    threshold: 0.1
+  
+  validity:
+    levels: ["geometric", "chemical", "physical"]
+    geometric:
+      min_distance: 1.5
+      lattice_positive: true
+    chemical:
+      goldschmidt_range: [0.8, 1.0]
+      coordination_check: true
+      oxidation_check: true
+    physical:
+      ml_relax: false
+      dft_check: false
+
+# 日志配置
+logging:
+  level: "INFO"
+  save_dir: "logs/cdvae_simple"
+  checkpoint_dir: "checkpoints/cdvae_simple"
+  output_dir: "outputs/cdvae_simple"
+  
+  # 保存频率
+  save_train_samples: true
+  save_val_samples: true
+  save_generated_samples: true
+  
+  # 可视化
+  visualize_training: true
+  visualize_generation: true
+
+# 实验配置
+experiment:
+  name: "baseline_cdvae_simple"
+  description: "Simplified CDVAE baseline for perovskite generation"
+  tags: ["baseline", "cdvae", "vae", "latent_diffusion"]
+  notes: |
+    简化版CDVAE实现:
+    - 用EGNN替代DimeNet++和GemNet
+    - 潜在维度64（原版256）
+    - 时间步500（原版1000）
+    - 两阶段训练: VAE预训练(20 epochs) + 潜在扩散(30 epochs)

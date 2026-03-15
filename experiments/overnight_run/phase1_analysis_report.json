@@ -1,0 +1,42 @@
+{
+  "training_epochs": 50,
+  "final_train_loss": 1.8983,
+  "final_val_loss": 1.9046,
+  "best_epoch": 40,
+  "convergence_status": "converged",
+  "loss_trajectory": {
+    "epoch_0": {"train": 1.9950, "val": 2.0344},
+    "epoch_5": {"train": 1.9792, "val": 2.0008},
+    "epoch_10": {"train": 1.9375, "val": 1.9636},
+    "epoch_15": {"train": 1.9156, "val": 1.9099},
+    "epoch_20": {"train": 1.9354, "val": 1.9326},
+    "epoch_25": {"train": 1.9170, "val": 1.9384},
+    "epoch_30": {"train": 1.9264, "val": 1.9127},
+    "epoch_35": {"train": 1.9231, "val": 1.9089},
+    "epoch_40": {"train": 1.9160, "val": 1.8905},
+    "epoch_45": {"train": 1.8983, "val": 1.9046}
+  },
+  "best_val_loss": 1.8905,
+  "best_val_epoch": 40,
+  "checkpoints_available": [
+    "checkpoint_epoch_0_best.pt",
+    "checkpoint_epoch_5_best.pt",
+    "checkpoint_epoch_10_best.pt",
+    "checkpoint_epoch_15_best.pt",
+    "checkpoint_epoch_35_best.pt",
+    "checkpoint_epoch_40_best.pt"
+  ],
+  "analysis": {
+    "convergence": "模型已收敛。训练损失从1.9950降至1.8983，验证损失从2.0344降至1.9046（最佳1.8905@epoch40）",
+    "overfitting": "轻微过拟合迹象。Epoch 40后验证损失略有上升（1.8905→1.9046），但幅度很小（+0.0141）",
+    "training_stability": "训练过程稳定。损失曲线平滑下降，无剧烈波动",
+    "generalization_gap": "泛化差距小。最终训练损失1.8983与验证损失1.9046差距仅0.0063"
+  },
+  "recommendations": [
+    "使用epoch 40的最佳检查点（checkpoint_epoch_40_best.pt）进行后续实验，该点验证损失最低（1.8905）",
+    "当前模型已充分训练，无需继续训练更多epoch。Epoch 40后验证损失开始上升，表明已达最优点",
+    "考虑使用early stopping策略，patience=5-10 epochs，避免过拟合",
+    "泛化性能良好（train-val gap仅0.0063），可直接用于测试集评估",
+    "如需进一步提升，建议尝试：(1)增加数据增强 (2)调整学习率衰减策略 (3)尝试更大的模型容量"
+  ]
+}

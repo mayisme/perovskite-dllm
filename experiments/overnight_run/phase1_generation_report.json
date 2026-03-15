@@ -1,0 +1,54 @@
+{
+  "generation_status": "success",
+  "num_samples": 100,
+  "lattice_stats": {
+    "a_range": [
+      3.5082831756854036,
+      4.98575771300101
+    ],
+    "b_range": [
+      3.5137955774249443,
+      4.98944719417895
+    ],
+    "c_range": [
+      3.510428195796786,
+      4.980914193972417
+    ],
+    "alpha_range": [
+      85.16587828927857,
+      94.9971767328613
+    ],
+    "beta_range": [
+      85.05061583846219,
+      94.96636837073905
+    ],
+    "gamma_range": [
+      85.10837651480298,
+      94.80032575285477
+    ],
+    "mean_volume": 78.90093778759056
+  },
+  "atom_type_distribution": {
+    "Ba": 100,
+    "Ti": 100,
+    "O": 300
+  },
+  "property_stats": {
+    "band_gap_range": [
+      2.025215039951518,
+      3.968220638072996
+    ],
+    "band_gap_mean": 3.0633096334314307,
+    "formation_energy_range": [
+      -5.988988401679158,
+      -4.00912496761738
+    ],
+    "formation_energy_mean": -5.039580943023031
+  },
+  "quality_assessment": {
+    "lattice_parameters_reasonable": true,
+    "coordinates_in_bounds": true,
+    "atom_types_valid": true,
+    "properties_in_expected_range": true
+  }
+}

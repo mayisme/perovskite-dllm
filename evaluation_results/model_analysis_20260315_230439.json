@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "checkpoint": "checkpoints/exp_hybrid/checkpoint_epoch_0_best.pt",
+    "config": {
+      "data": {
+        "raw_data_path": "data/raw/perovskites_full.json",
+        "processed_data_path": "data/processed/perovskites_20k_relaxed.h5",
+        "split_ratios": [
+          0.8,
+          0.1,
+          0.1
+        ],
+        "batch_size": 16,
+        "num_workers": 2,
+        "augment": true,
+        "energy_threshold": 1.0,
+        "max_atoms": 30,
+        "skip_topology": true,
+        "skip_coordination": true,
+        "skip_oxidation": true,
+        "skip_dedup": true,
+        "seed": 42
+      },
+      "model": {
+        "hidden_dim": 128,
+        "n_egnn_layers": 3,
+        "n_transformer_layers": 2,
+        "cutoff_radius": 6.0,
+        "n_atom_types": 100,
+        "num_heads": 4,
+        "dropout": 0.1
+      },
+      "diffusion": {
+        "timesteps": 500,
+        "schedule_type": "cosine",
+        "prediction_type": "epsilon"
+      },
+      "training": {
+        "epochs": 50,
+        "lr": 0.0001,
+        "weight_decay": 0.01,
+        "grad_clip": 1.0,
+        "val_frequency": 5,
+        "checkpoint_frequency": 10,
+        "early_stopping_patience": 15,
+        "device": "cpu",
+        "use_wandb": false,
+        "physics_loss_weight": 0.0
+      },
+      "physics_loss": {
+        "goldschmidt": 0.1,
+        "coordination": 0.05,
+        "bond_length": 0.03,
+        "pauli": 0.1
+      },
+      "generation": {
+        "num_samples": 100,
+        "sampling_steps": 100,
+        "sampler": "ddpm",
+        "guidance_scale": 3.0,
+        "temperature": 1.0
+      },
+      "validation": {
+        "min_distance": 1.5,
+        "goldschmidt_range": [
+          0.8,
+          1.0
+        ],
+        "coordination_tolerance": 0.5,
+        "use_ml_potential": false,
+        "ml_potential_type": "chgnet",
+        "use_dft": false,
+        "dft_top_k": 10
+      }
+    },
+    "timestamp": "2026-03-15T23:04:39.426862",
+    "training_epoch": 0,
+    "training_loss": "unknown"
+  },
+  "architecture": {
+    "hidden_dim": 128,
+    "n_egnn_layers": 3,
+    "n_transformer_layers": 2,
+    "num_heads": 4,
+    "dropout": 0.1,
+    "cutoff_radius": 6.0
+  },
+  "parameters": {
+    "total": 841996,
+    "trainable": 841996,
+    "by_component": {
+      "node_emb": 12800,
+      "time_emb": 16768,
+      "bandgap_emb": 256,
+      "formation_energy_emb": 256,
+      "egnn_layers": 347907,
+      "transformer": 429824,
+      "out_coords": 16899,
+      "out_lattice": 17286
+    },
+    "by_type": {
+      "egnn": 347907,
+      "transformer": 429824,
+      "embedding": 30080,
+      "output": 67209
+    },
+    "ratios": {
+      "egnn": 0.4131931743143673,
+      "transformer": 0.5104822350700003,
+      "embedding": 0.03572463527142647,
+      "output": 0.0798210442804954
+    }
+  }
+}

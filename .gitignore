@@ -8,3 +8,8 @@ __pycache__/
 checkpoints/
 data/raw/
 data/*.log
+
+# autoresearch
+results.tsv
+run.log
+*.log

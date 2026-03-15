@@ -1,0 +1,74 @@
+# 学习率调优实验 - 配置1: lr=5e-5 + warmup + cosine decay
+# 基于 configs/base.yaml，仅修改学习率和调度器
+
+# 数据配置
+data:
+  raw_data_path: "data/raw/perovskites_full.json"
+  processed_data_path: "data/processed/perovskites_20k_relaxed.h5"
+  split_ratios: [0.8, 0.1, 0.1]
+  batch_size: 16
+  num_workers: 2
+  augment: true
+  energy_threshold: 1.0
+  max_atoms: 30
+  skip_topology: true
+  skip_coordination: true
+  skip_oxidation: true
+  skip_dedup: true
+  seed: 42
+
+# 模型配置
+model:
+  hidden_dim: 128
+  n_egnn_layers: 3
+  n_transformer_layers: 2
+  cutoff_radius: 6.0
+  n_atom_types: 100
+  num_heads: 4
+  dropout: 0.1
+
+# 扩散配置
+diffusion:
+  timesteps: 500
+  schedule_type: "cosine"
+  prediction_type: "epsilon"
+
+# 训练配置 - 修改部分
+training:
+  epochs: 50
+  lr: 5.0e-5  # 较小学习率
+  lr_scheduler: "cosine"  # cosine decay
+  warmup_steps: 500  # warmup 500 steps
+  weight_decay: 0.01
+  grad_clip: 1.0
+  val_frequency: 5
+  checkpoint_frequency: 10
+  early_stopping_patience: 15
+  device: "cpu"
+  use_wandb: false
+  physics_loss_weight: 0.0
+
+# 物理损失权重
+physics_loss:
+  goldschmidt: 0.1
+  coordination: 0.05
+  bond_length: 0.03
+  pauli: 0.1
+
+# 生成配置
+generation:
+  num_samples: 100
+  sampling_steps: 100
+  sampler: "ddpm"
+  guidance_scale: 3.0
+  temperature: 1.0
+
+# 验证配置
+validation:
+  min_distance: 1.5
+  goldschmidt_range: [0.8, 1.0]
+  coordination_tolerance: 0.5
+  use_ml_potential: false
+  ml_potential_type: "chgnet"
+  use_dft: false
+  dft_top_k: 10
