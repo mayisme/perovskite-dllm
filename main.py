@@ -36,7 +36,7 @@ def cmd_train(args):
     """训练命令。"""
     from data.dataset import get_dataloader
     from data.ionic_radii import IonicRadiiDatabase
-    from models.egnn import EGNNModel
+    from models.hybrid_model import HybridEGNNTransformer
     from models.diffusion import DiffusionSchedule
     from models.physics_loss import PhysicsLoss
     from train import DiffusionTrainer
@@ -63,12 +63,15 @@ def cmd_train(args):
         augment=False
     )
 
-    # 模型
-    model = EGNNModel(
+    # 模型 - 使用混合架构
+    model = HybridEGNNTransformer(
         hidden_dim=config['model']['hidden_dim'],
-        n_layers=config['model']['n_layers'],
+        n_egnn_layers=config['model'].get('n_egnn_layers', 3),
+        n_transformer_layers=config['model'].get('n_transformer_layers', 2),
+        n_atom_types=config['model']['n_atom_types'],
         cutoff=config['model']['cutoff_radius'],
-        n_atom_types=config['model']['n_atom_types']
+        num_heads=config['model'].get('num_heads', 4),
+        dropout=config['model'].get('dropout', 0.1)
     )
 
     # 扩散调度器

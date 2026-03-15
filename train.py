@@ -98,17 +98,19 @@ class DiffusionTrainer:
             xt_lattice, noise_pred_lattice, t
         )
 
-        # 转换回实空间
-        x0_pred_lattice_real = self.diffusion.log_space_to_lattice(x0_pred_lattice)
-
-        # 物理损失
-        loss_physics = self.physics_loss.combined_loss(
-            x0_pred_coords, x0_pred_lattice_real, atom_types, self.physics_weights
-        )
-
-        # 总损失
+        # 物理损失（仅在权重>0时计算）
         physics_weight = self.config.get('physics_loss_weight', 0.1)
-        loss = loss_noise + physics_weight * loss_physics
+        if physics_weight > 0:
+            # 转换回实空间
+            x0_pred_lattice_real = self.diffusion.log_space_to_lattice(x0_pred_lattice)
+            
+            loss_physics = self.physics_loss.combined_loss(
+                x0_pred_coords, x0_pred_lattice_real, atom_types, self.physics_weights
+            )
+            loss = loss_noise + physics_weight * loss_physics
+        else:
+            loss_physics = torch.tensor(0.0, device=self.device)
+            loss = loss_noise
 
         # 反向传播
         loss.backward()

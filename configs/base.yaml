@@ -19,9 +19,12 @@ data:
 # 模型配置
 model:
   hidden_dim: 128
-  n_layers: 4
+  n_egnn_layers: 3  # EGNN层数（局部几何）
+  n_transformer_layers: 2  # Transformer层数（全局依赖）
   cutoff_radius: 6.0
   n_atom_types: 100
+  num_heads: 4  # 多头注意力头数
+  dropout: 0.1  # Dropout率
 
 # 扩散配置
 diffusion:

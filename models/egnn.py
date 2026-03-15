@@ -126,9 +126,17 @@ class EGNNLayer(nn.Module):
         cos_beta = torch.cos(beta_rad)
         cos_gamma = torch.cos(gamma_rad)
         sin_gamma = torch.sin(gamma_rad)
+        
+        # 数值稳定性：避免除以接近0的sin_gamma
+        sin_gamma = torch.clamp(sin_gamma, min=1e-6)
 
-        vol = torch.sqrt(1 - cos_alpha**2 - cos_beta**2 - cos_gamma**2 +
-                        2 * cos_alpha * cos_beta * cos_gamma)
+        vol = torch.sqrt(
+            torch.clamp(
+                1 - cos_alpha**2 - cos_beta**2 - cos_gamma**2 +
+                2 * cos_alpha * cos_beta * cos_gamma,
+                min=1e-6  # 避免负数或0
+            )
+        )
 
         matrices = torch.zeros(lattice_params.shape[0], 3, 3, device=lattice_params.device)
         matrices[:, 0, 0] = a
