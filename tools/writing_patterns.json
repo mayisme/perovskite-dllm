@@ -1,0 +1,13 @@
+[
+  {
+    "pattern_type": "quantify",
+    "examples": [
+      [
+        "The model performs well",
+        "The model achieves 87.3% validity"
+      ]
+    ],
+    "frequency": 1,
+    "confidence": 0.1
+  }
+]
